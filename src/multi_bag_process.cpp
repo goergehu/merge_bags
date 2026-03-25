@@ -191,6 +191,7 @@ public:
       pq.pop();
 
       // 写入消息到新包
+      top.msg->time_stamp = static_cast<rcutils_time_point_value_t>(top.timestamp * 1e9);
       writer->write(top.msg);
       total_msgs++;
 
