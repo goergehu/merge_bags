@@ -15,6 +15,7 @@
 #include <rosbag2_storage/topic_metadata.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 #include <sensor_msgs/msg/imu.hpp>
+#include <nav_msgs/msg/odometry.hpp>
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <sbg_driver/msg/sbg_ekf_nav.hpp>
 #include <sbg_driver/msg/sbg_ekf_quat.hpp>
@@ -37,10 +38,12 @@ std::map<std::string, int> MAP_TOPIC_TYPE = {{"/ENCread", 0},
                                              {"/imu/data1", 1},
                                              {"/lidar1/lidar_points1/pandar", 2},
                                              {"/lidar0/lidar_points0/pandar", 2},
+                                             {"/relief/lc/mapping", 2},
                                              {"/ntrip_client/nmea", 3},
                                              {"/sbg/ekf_nav", 4},
                                              {"/sbg/ekf_quat", 5},
-                                             {"/sbg/imu_data", 6}};
+                                             {"/sbg/imu_data", 6},
+                                             {"/loam_opensource", 7}};
 
 double GetTimestamp(std::shared_ptr<rosbag2_storage::SerializedBagMessage> msg) {
   if(MAP_TOPIC_TYPE.find(msg->topic_name) == MAP_TOPIC_TYPE.end()) {
@@ -63,6 +66,8 @@ double GetTimestamp(std::shared_ptr<rosbag2_storage::SerializedBagMessage> msg) 
       return GET_STAMP_DOUBLE(msg, sbg_driver::msg::SbgEkfQuat);
     case 6:
       return GET_STAMP_DOUBLE(msg, sbg_driver::msg::SbgImuData);
+    case 7:
+      return GET_STAMP_DOUBLE(msg, nav_msgs::msg::Odometry);
     default:
       std::cerr << "Unkown msg topic name " << msg->topic_name << ", please add to container"<< std::endl;
       break;

@@ -17,6 +17,7 @@
   <depend>rosbag2_transport</depend>
   <depend>nmea_msgs</depend>
   <depend>sbg_driver</depend>
+  <depend>nav_msgs</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

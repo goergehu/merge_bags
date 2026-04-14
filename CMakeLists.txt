@@ -17,6 +17,7 @@ find_package(rosbag2_storage REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(sbg_driver REQUIRED)
 find_package(nmea_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 add_executable(simple_bag_recorder src/simple_bag_recorder.cpp)
 ament_target_dependencies(simple_bag_recorder rclcpp rosbag2_cpp)
@@ -43,6 +44,7 @@ ament_target_dependencies(bag_merge_tool
   sensor_msgs
   sbg_driver
   nmea_msgs
+  nav_msgs
 )
 install(TARGETS
   bag_merge_tool
